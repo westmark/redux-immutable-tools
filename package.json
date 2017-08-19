@@ -1,0 +1,38 @@
+{
+  "name": "redux-immutable-tools",
+  "version": "1.0.0",
+  "description": "A collection of assorted immutable utility functions for dealing with Redux",
+  "author": "Fredrik Westmark (fredrik.westmark@gmail.com)",
+  "license": "ISC",
+  "module": "src/index.js",
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "lib",
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "clean": "rimraf lib dist es",
+    "build": "npm run build:es && npm run build:commonjs",
+    "prepublish": "npm run clean && npm run build",
+    "build:commonjs": "cross-env NODE_ENV=production babel src --presets react-app --plugins transform-es2015-modules-commonjs --transform-es2015-modules-commonjs loose --out-dir lib --copy-files",
+    "build:es": "cross-env NODE_ENV=production babel src --presets react-app --out-dir es --copy-files"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-preset-react-app": "^3.0.1",
+    "babel-register": "^6.24.0",
+    "cross-env": "^5.0.1",
+    "eslint-config-westlint": "git+ssh://git@github.com/westmark/westlint.git",
+    "rimraf": "^2.6.1"
+  },
+  "peerDependencies": {
+    "immutable": ">= 3.8.0"
+  },
+  "eslintConfig": {
+    "extends": "westlint"
+  }
+}
