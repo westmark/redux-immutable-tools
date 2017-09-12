@@ -60,7 +60,7 @@ function pick( record, keys ) {
   return obj;
 }
 
-export function updateOrMerge( state, containerPath, RecordType, values = {} ) {
+export function updateOrMerge( state, containerPath, RecordType, values = {}, { replace = false } = {} ) {
   let primaryKey = 'id';
 
   if ( RecordType.primaryKey ) {
@@ -83,7 +83,10 @@ export function updateOrMerge( state, containerPath, RecordType, values = {} ) {
       }
       return true;
     } );
-    let merged = existing.mergeWith( merge, pick( newEntry, legalKeys ) );
+    let merged = newEntry;
+    if ( !replace ) {
+      merged = existing.mergeWith( merge, pick( merged, legalKeys ) );
+    }
     // Now overwrite the lists
     listComposerKeys.forEach( ( key ) => {
       merged = merged.set( key, newEntry.get( key ) );

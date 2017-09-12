@@ -17,7 +17,8 @@
     "build": "npm run build:es && npm run build:commonjs",
     "prepublish": "npm run clean && npm run build",
     "build:commonjs": "cross-env NODE_ENV=production babel src --presets react-app --plugins transform-es2015-modules-commonjs --transform-es2015-modules-commonjs loose --out-dir lib --copy-files",
-    "build:es": "cross-env NODE_ENV=production babel src --presets react-app --out-dir es --copy-files"
+    "build:es": "cross-env NODE_ENV=production babel src --presets react-app --out-dir es --copy-files",
+    "watch:es": "cross-env NODE_ENV=production babel src --presets react-app --out-dir es --copy-files --watch"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
