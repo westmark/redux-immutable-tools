@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: 0 */
+
 import {
   Record,
   List,
@@ -47,6 +49,16 @@ export function recordFromJs( MyRecord, values ) {
     }
   } );
 
+  // Make sure all non-included values that are either Records or ListComposers are set to empty versions. Otherwise their types will be wrong
+  MyRecord.prototype._keys.forEach( ( key ) => {
+    if ( !Reflect.has( data, key ) ) {
+      if ( MyRecord.prototype._defaultValues[ key ] instanceof ListOfComposer ) {
+        data[ key ] = new List();
+      } else if ( MyRecord.prototype._defaultValues[ key ] && MyRecord.prototype._defaultValues[ key ].constructor === Record.constructor ) {
+        data[ key ] = new MyRecord.prototype._defaultValues[ key ]();
+      }
+    }
+  } );
   return new MyRecord( data );
 }
 
