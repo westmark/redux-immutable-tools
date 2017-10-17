@@ -120,3 +120,25 @@ export function boolify( obj ) {
 
   return ret;
 }
+
+function toJS( val ) {
+  return val && typeof val === 'object' && Reflect.has( val, 'toJS' ) ? val.toJS() : val;
+}
+
+export function diff( a, b ) {
+  if ( a.constructor === b.constructor ) {
+    if ( a === b ) {
+      return {};
+    }
+    const keys = a.keySeq().toArray();
+    const d = {};
+    keys.forEach( ( key ) => {
+      if ( a.get( key ) !== b.get( key ) ) {
+        d[ key ] = toJS( b.get( key ) );
+      }
+    } );
+    return d;
+  }
+
+  return null;
+}
