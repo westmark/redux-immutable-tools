@@ -5,6 +5,7 @@ import {
   List,
   Set as ImmutableSet,
   fromJS as immutableFromJS,
+  Map as ImmutableMap,
 } from 'immutable';
 
 export function ListOfComposer( recordType ) {
@@ -36,7 +37,7 @@ export function recordFromJs( MyRecord, values ) {
           data[ key ] = value;
         }
       } else if ( typeof values[ key ] === 'object' ) {
-        if ( prop.constructor === Record.constructor ) {
+        if ( prop.constructor === Record.constructor && prop !== ImmutableMap && prop !== ImmutableSet ) {
           data[ key ] = recordFromJs( prop, value );
         } else {
           data[ key ] = immutableFromJS( value );
