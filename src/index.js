@@ -73,11 +73,9 @@ function pick( record, keys ) {
   return obj;
 }
 
-export function updateOrMerge( state, containerPath, RecordType, values = {}, { replace = false } = {} ) {
-  let primaryKey = 'id';
-
+export function updateOrMerge( state, containerPath, RecordType, values = {}, { replace = false, primaryKey = 'id' } = {} ) {
   if ( RecordType.primaryKey ) {
-    primaryKey = RecordType.primaryKey;
+    primaryKey = RecordType.primaryKey; // eslint-disable-line
   }
   const id = values[ primaryKey ];
 
