@@ -1,6 +1,6 @@
 {
   "name": "redux-immutable-tools",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A collection of assorted immutable utility functions for dealing with Redux",
   "author": "Fredrik Westmark (fredrik.westmark@gmail.com)",
   "license": "ISC",
